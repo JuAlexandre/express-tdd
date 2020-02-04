@@ -8,13 +8,12 @@ const connection = mysql.createConnection({
   password: process.env.DB_PASS,
 });
 
-connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
+connection.connect(error => {
+  if (error) {
+    return console.error(`Error connecting: ${error.stack}`);
   }
 
-  console.log('connected as id ' + connection.threadId);
+  return console.log(`Connected as ID ${connection.threadId}`);
 });
 
 module.exports = connection;
