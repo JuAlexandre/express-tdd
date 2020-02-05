@@ -1,8 +1,12 @@
 const request = require('supertest');
 
 const app = require('../app');
+const connection = require('../connection');
 
 describe('Test routes', () => {
+  // Truncate bookmark table before each test
+  beforeEach(done => connection.query('TRUNCATE bookmark', done));
+
   it('GET / sends "Hello World" as json', done => {
     request(app)
       .get('/')
